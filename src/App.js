@@ -1,26 +1,49 @@
-import React from 'react';
-import logo from './logo.svg';
+import React, { PureComponent } from 'react';
 import './App.css';
+//import logo from './logo.svg';
+import Header from './Header.js';
+import DropdownMenu from './DropdownMenu.js';
+import ModelLayerList from './ModelLayerList.js';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+export const LayersEnum = Object.freeze({
+  CONV: "Convolution",
+  BATCH: "Batch-Normalization",
+  MAXPOOL: "Max-Pooling",
+  DROPOUT: "Dropout"
+});
+
+export default class App extends PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {
+      modelLayers: []
+    };
+
+    this.addModelLayer = this.addModelLayer.bind(this);
+  }
+
+  addModelLayer(layerType) {
+    var newLayer = {
+      type: layerType
+    };
+
+    this.setState({
+      modelLayers: [...this.state.modelLayers, newLayer]
+    });
+  }
+
+  updateModelLayer(layerIndex, values) {
+    return;
+  }
+
+  render() {
+    return (
+      <div>
+        <Header className="app-header"/>
+        <DropdownMenu handleDropdownSelect={this.addModelLayer} />
+        <br></br>
+        <ModelLayerList modelLayers={this.state.modelLayers} />
+      </div>
+    );
+  }
 }
-
-export default App;

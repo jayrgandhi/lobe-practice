@@ -1,0 +1,17 @@
+.model-layer-container {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+.model-layer-container:hover {
+  background-color: #eee;
+}
+
+.model-layer-container .title {
+  position: relative;
+  font-weight: bold;
+}
+
+.layer-inputs {
+	width: 60px;
+}
